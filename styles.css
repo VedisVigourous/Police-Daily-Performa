@@ -1,14 +1,14 @@
 :root {
-	--page-bg: #eef2f6;
+	--page-bg: #f6eeee;
 	--sheet-bg: #ffffff;
 	--grid: #4b5563;
-	--grid-soft: #bfc8d4;
-	--header-bg: #edf3f8;
-	--title-bg: #f6f8fb;
+	--grid-soft: #d4bfbf;
+	--header-bg: #fff9f9;
+	--title-bg: #fbf6f6;
 	--text: #111827;
 	--muted: #5b6573;
-	--accent: #2563eb;
-	--focus: #93c5fd;
+	--accent: #eb2535;
+	--focus: #fd939a;
 }
 
 * {
@@ -45,7 +45,7 @@ body {
 	padding: 14px 18px;
 	border: 1px solid rgba(75, 85, 99, 0.14);
 	border-radius: 14px;
-	background: rgba(255, 255, 255, 0.82);
+	background: rgb(255, 255, 255);
 	backdrop-filter: blur(8px);
 	box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
 }
@@ -222,6 +222,31 @@ body {
 	background: #f8fbff;
 }
 
+.print-note {
+	display: none;
+}
+
+.print-note-label {
+	font-weight: 700;
+	background: #f3f7fb;
+	border: 1px solid var(--grid);
+	border-bottom: 0;
+	padding: 10px 12px;
+	text-align: center;
+}
+
+.print-note-content {
+	min-height: 70px;
+	border: 1px solid var(--grid);
+	padding: 10px 12px;
+	white-space: pre-wrap;
+	word-break: break-word;
+	background: #fff;
+	color: var(--text);
+	font: inherit;
+	line-height: 1.35;
+}
+
 .actions {
 	display: flex;
 	gap: 10px;
@@ -232,7 +257,7 @@ body {
 .btn {
 	appearance: none;
 	border: 1px solid rgba(37, 99, 235, 0.22);
-	background: linear-gradient(180deg, #3b82f6, #2563eb);
+	background: linear-gradient(180deg, #f63b3b, #eb2525);
 	color: #fff;
 	border-radius: 10px;
 	padding: 10px 14px;
@@ -249,12 +274,37 @@ body {
 	box-shadow: none;
 }
 
+.btn.secondary:hover {
+	background: #f8fafc;
+}
+
 .btn:hover {
 	filter: brightness(1.02);
 }
 
 .btn:active {
 	transform: translateY(1px);
+}
+
+.lastSection {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 12px;
+}
+
+.author {
+	font-size: 14px;
+	color: var(--muted);
+}
+
+.author a {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+.author a:hover {
+	text-decoration: underline;
 }
 
 @media (max-width: 900px) {
@@ -273,6 +323,11 @@ body {
 }
 
 @media print {
+	@page {
+		size: A4 landscape;
+		margin: 4mm;
+	}
+
 	body {
 		padding: 0;
 		background: #fff;
@@ -283,7 +338,36 @@ body {
 		display: none !important;
 	}
 
+	.note-row {
+		display: none !important;
+	}
+
+	.print-note {
+		display: block;
+		position: static;
+		margin-top: 8px;
+		page-break-inside: avoid;
+		break-inside: avoid;
+		clear: both;
+	}
+
+	.print-note-label,
+	.print-note-content {
+		margin-left: 12px;
+		margin-right: 12px;
+	}
+
+	.print-note-label {
+		border-bottom: 0;
+	}
+
+	.print-note-content {
+		min-height: 36px;
+		font-size: 11px;
+	}
+
 	.page {
+		zoom: 0.82;
 		max-width: none;
 	}
 
@@ -298,6 +382,20 @@ body {
 		min-width: 100%;
 	}
 
+	.sheet .title-row th {
+		font-size: 19px;
+		padding: 8px 8px;
+	}
+
+	.sheet .header-row th {
+		font-size: 10px;
+		padding: 5px 4px;
+	}
+
+	.sheet td {
+		height: 28px;
+	}
+
 	.sheet .title-row th,
 	.sheet .header-row th,
 	.sheet td {
@@ -306,6 +404,9 @@ body {
 	}
 
 	.cell-input {
+		min-height: 28px;
+		padding: 5px 6px;
+		font-size: 11px;
 		color: #000;
 	}
 

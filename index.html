@@ -13,11 +13,13 @@
 				<h1>Late Arrival of Local Police Performa</h1>
 				<p>Fill the fields directly in the table, then take a clean daily screenshot or print to PDF.</p>
 			</div>
+			<img src="https://images.seeklogo.com/logo-png/30/1/delhi-police-logo-png_seeklogo-304814.png" width="5%">
 			<div class="meta">
-				<span class="chip">Date: <input class="cell-input" style="width: 140px; height: 22px; padding: 0 4px;" type="date" aria-label="Report date" /></span>
+				<span class="chip">Date: <input id="report-date" class="cell-input" style="width: 140px; height: 22px; padding: 0 4px;" type="date" aria-label="Report date" /></span>
 				<div class="actions">
-					<button class="btn secondary" type="button" onclick="window.print()">Print / Save</button>
-					<button class="btn" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">Top</button>
+					<button id="image-button" class="btn secondary" type="button">Download Image</button>
+					<button id="print-button" class="btn secondary" type="button">Print / Save</button>
+					<button id="top-button" class="btn" type="button">Top</button>
 				</div>
 			</div>
 		</section>
@@ -60,67 +62,27 @@
 						<tr class="note-row">
 							<td class="note-label" colspan="2">Note</td>
 							<td colspan="9">
-								<textarea class="note-input" aria-label="Daily note" placeholder=""></textarea>
+								<textarea class="note-input" aria-label="Daily note"></textarea>
 							</td>
 						</tr>
 					</tfoot>
 			</table>
 		</section>
 
-		<div class="footer-note">Tip: use Tab to move through cells quickly. The page is styled to look clean in a browser screenshot and when printed.</div>
+		<div class="print-note" aria-hidden="true">
+			<div class="print-note-label">Note</div>
+			<div id="print-note-content" class="print-note-content"></div>
+		</div>
+
+		<a id="download-link" style="display:none" download="local-police-performa.png"></a>
+
+		<section class="lastSection">
+			<div class="footer-note">Tip: use Tab to move through cells quickly. The page is styled to look clean in a browser screenshot and when printed.</div>
+			<div class="author"><i>Made by: <a href="https://github.com/VedisVigourous" target="_blank">VedisVigourous</a></i></div>
+		</section>
 	</main>
 
-	<script>
-		const rows = document.getElementById('rows');
-
-		const columnConfigs = [
-			{ key: 'eventId', placeholder: 'Event ID' },
-			{ key: 'station', placeholder: 'Police Station' },
-			{ key: 'dateTime', placeholder: 'DD/MM/YYYY HH:MM' },
-			{ key: 'gist', placeholder: 'Call head and gist of call', multiline: true },
-			{ key: 'callSign', placeholder: 'MPV call sign' },
-			{ key: 'rcdTime', placeholder: 'MPV RCD time' },
-			{ key: 'reachTime', placeholder: 'LP reach time' },
-			{ key: 'totalTime', placeholder: 'Total time taken by LP' },
-			{ key: 'ioName', placeholder: 'Name of IO' },
-			{ key: 'cpcr', placeholder: 'Yes / No / N.A.', multiline: true },
-		];
-
-		for (let i = 1; i <= 10; i += 1) {
-			const tr = document.createElement('tr');
-
-			const snoCell = document.createElement('td');
-			const snoInput = document.createElement('input');
-			snoInput.className = 'cell-input serial';
-			snoInput.value = i;
-			snoInput.readOnly = true;
-			snoInput.tabIndex = -1;
-			snoInput.setAttribute('aria-label', `Serial number ${i}`);
-			snoCell.appendChild(snoInput);
-			tr.appendChild(snoCell);
-
-			columnConfigs.forEach((config) => {
-				const td = document.createElement('td');
-				const input = document.createElement('textarea');
-				input.className = config.multiline ? 'cell-input wrap' : 'cell-input';
-				input.setAttribute('aria-label', `${config.placeholder} row ${i}`);
-
-				td.appendChild(input);
-				tr.appendChild(td);
-			});
-
-			rows.appendChild(tr);
-		}
-
-		const autoGrow = (element) => {
-			element.style.height = 'auto';
-			element.style.height = `${element.scrollHeight}px`;
-		};
-
-		document.querySelectorAll('.cell-input, .note-input').forEach((element) => {
-			autoGrow(element);
-			element.addEventListener('input', () => autoGrow(element));
-		});
-	</script>
+		<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+	<script src="script.js" defer></script>
 </body>
 </html>
