@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Late Arrival of Local Police Performa</title>
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<main class="page">
+		<section class="toolbar" aria-label="Form controls">
+			<div>
+				<h1>Late Arrival of Local Police Performa</h1>
+				<p>Fill the fields directly in the table, then take a clean daily screenshot or print to PDF.</p>
+			</div>
+			<div class="meta">
+				<span class="chip">Date: <input class="cell-input" style="width: 140px; height: 22px; padding: 0 4px;" type="date" aria-label="Report date" /></span>
+				<div class="actions">
+					<button class="btn secondary" type="button" onclick="window.print()">Print / Save</button>
+					<button class="btn" type="button" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">Top</button>
+				</div>
+			</div>
+		</section>
+
+		<section class="sheet-wrap" aria-label="Late Arrival of Local Police Performa table">
+			<table class="sheet">
+				<colgroup>
+					<col class="col-sno" />
+					<col class="col-event" />
+					<col class="col-station" />
+					<col class="col-date" />
+					<col class="col-call" />
+					<col class="col-sign" />
+					<col class="col-rcd" />
+					<col class="col-reach" />
+					<col class="col-total" />
+					<col class="col-io" />
+					<col class="col-cpcr" />
+				</colgroup>
+				<thead>
+					<tr class="title-row">
+						<th colspan="11">Late Arrival of Local Police Performa</th>
+					</tr>
+					<tr class="header-row">
+						<th>S.No</th>
+						<th>Event ID</th>
+						<th>Police Station</th>
+						<th>Date &amp; Time of Call</th>
+						<th>Call Head and Gist of call</th>
+						<th>MPV Call Sign</th>
+						<th>MPV RCD Time</th>
+						<th>LP reach Time</th>
+						<th>Total Time taken by LP</th>
+						<th>Name of IO</th>
+						<th>Whether CPCR Informed by MPV Staff of non-arrival of LP</th>
+					</tr>
+				</thead>
+				<tbody id="rows"></tbody>
+					<tfoot>
+						<tr class="note-row">
+							<td class="note-label" colspan="2">Note</td>
+							<td colspan="9">
+								<textarea class="note-input" aria-label="Daily note" placeholder=""></textarea>
+							</td>
+						</tr>
+					</tfoot>
+			</table>
+		</section>
+
+		<div class="footer-note">Tip: use Tab to move through cells quickly. The page is styled to look clean in a browser screenshot and when printed.</div>
+	</main>
+
+	<script>
+		const rows = document.getElementById('rows');
+
+		const columnConfigs = [
+			{ key: 'eventId', placeholder: 'Event ID' },
+			{ key: 'station', placeholder: 'Police Station' },
+			{ key: 'dateTime', placeholder: 'DD/MM/YYYY HH:MM' },
+			{ key: 'gist', placeholder: 'Call head and gist of call', multiline: true },
+			{ key: 'callSign', placeholder: 'MPV call sign' },
+			{ key: 'rcdTime', placeholder: 'MPV RCD time' },
+			{ key: 'reachTime', placeholder: 'LP reach time' },
+			{ key: 'totalTime', placeholder: 'Total time taken by LP' },
+			{ key: 'ioName', placeholder: 'Name of IO' },
+			{ key: 'cpcr', placeholder: 'Yes / No / N.A.', multiline: true },
+		];
+
+		for (let i = 1; i <= 10; i += 1) {
+			const tr = document.createElement('tr');
+
+			const snoCell = document.createElement('td');
+			const snoInput = document.createElement('input');
+			snoInput.className = 'cell-input serial';
+			snoInput.value = i;
+			snoInput.readOnly = true;
+			snoInput.tabIndex = -1;
+			snoInput.setAttribute('aria-label', `Serial number ${i}`);
+			snoCell.appendChild(snoInput);
+			tr.appendChild(snoCell);
+
+			columnConfigs.forEach((config) => {
+				const td = document.createElement('td');
+				const input = document.createElement('textarea');
+				input.className = config.multiline ? 'cell-input wrap' : 'cell-input';
+				input.setAttribute('aria-label', `${config.placeholder} row ${i}`);
+
+				td.appendChild(input);
+				tr.appendChild(td);
+			});
+
+			rows.appendChild(tr);
+		}
+
+		const autoGrow = (element) => {
+			element.style.height = 'auto';
+			element.style.height = `${element.scrollHeight}px`;
+		};
+
+		document.querySelectorAll('.cell-input, .note-input').forEach((element) => {
+			autoGrow(element);
+			element.addEventListener('input', () => autoGrow(element));
+		});
+	</script>
+</body>
+</html>
