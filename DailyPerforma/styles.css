@@ -144,6 +144,9 @@ body {
 	overflow: hidden;
 	display: block;
 	line-height: 1.35;
+	overflow-wrap: anywhere;
+	word-break: break-word;
+	white-space: pre-wrap;
 }
 
 .cell-input::placeholder {
@@ -185,6 +188,7 @@ body {
 .col-io { width: 6.5%; }
 .col-cpcr { width: 15%; }
 
+
 .footer-note {
 	margin-top: 12px;
 	color: var(--muted);
@@ -215,6 +219,9 @@ body {
 	overflow: hidden;
 	display: block;
 	line-height: 1.35;
+	overflow-wrap: anywhere;
+	word-break: break-word;
+	white-space: pre-wrap;
 }
 
 .note-input:focus {
@@ -241,6 +248,7 @@ body {
 	padding: 10px 12px;
 	white-space: pre-wrap;
 	word-break: break-word;
+	overflow-wrap: anywhere;
 	background: #fff;
 	color: var(--text);
 	font: inherit;
