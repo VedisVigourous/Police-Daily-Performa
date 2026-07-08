@@ -176,17 +176,17 @@ body {
 	line-height: 1.4;
 }
 
-.col-sno { width: 3.5%; }
-.col-event { width: 7%; }
-.col-station { width: 7.5%; }
+.col-sno { width: 4.5%; }
+.col-event { width: 8%; }
+.col-station { width: 8.5%; }
 .col-date { width: 8%; }
 .col-call { width: 10.5%; }
 .col-sign { width: 7%; }
 .col-rcd { width: 7%; }
 .col-reach { width: 7%; }
 .col-total { width: 8.5%; }
-.col-io { width: 6.5%; }
-.col-cpcr { width: 15%; }
+.col-io { width: 9.5%; }
+.col-cpcr { width: 5%; }
 
 
 .footer-note {
